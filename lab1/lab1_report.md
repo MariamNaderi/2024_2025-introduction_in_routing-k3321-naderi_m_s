@@ -14,7 +14,7 @@ Lab: Lab1
 
 Date of create: 25.09.2024
 
-Date of finished: 28.09.2023
+Date of finished: 02.10.2023
 
 # Лабораторная работ №1 "Установка ContainerLab и развертывание тестовой сети связи"
 

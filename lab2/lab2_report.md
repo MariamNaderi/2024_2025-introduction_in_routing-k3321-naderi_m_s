@@ -32,7 +32,7 @@ Date of finished: 16.10.2024
 Далее были настроены все роутеры с помощью следующих команд:
 (ssh admin@[ip-адрес]; пароль -- admin)
 
-### RO:
+### RO1_BRL:
 ```
 /interface vlan
 add name=RO_vlan10 vlan-id=10 interface=ether4 disabled=no
@@ -55,7 +55,7 @@ add name=server10 address-pool=pool_vlan10 interface=RO_vlan10 disabled=no
 add name=server20 address-pool=pool_vlan20 interface=RO_vlan20 disabled=no
 ```
 
-### SW1:
+### RO1_MSK:
 ```
 /interface vlan
 add name=SW1_vlan10_1 vlan-id=10 interface=ether4 disabled=no
@@ -78,7 +78,7 @@ add interface=SW1_br10 disabled=no
 add interface=SW1_br20 disabled=no
 ```
 
-### SW2_1:
+### RO1_FRT:
 ```
 /interface vlan
 add name=SW2_1_vlan10 vlan-id=10 interface=ether4 disabled=no
@@ -92,22 +92,6 @@ add interface=ether5 bridge=SW2_1_br10
 
 /ip dhcp-client
 add interface=SW2_1_br10 disabled=no
-```
-
-### SW2_2:
-```
-/interface vlan
-add name=SW2_2_vlan20 vlan-id=20 interface=ether4 disabled=no
-
-/interface bridge
-add name=SW2_2_br20
-
-/interface bridge port
-add interface=SW2_2_vlan20 bridge=SW2_1_br20
-add interface=ether5 bridge=SW2_1_br20
-
-/ip dhcp-client
-add interface=SW2_2_br20 disabled=no
 ```
 
 Настройка PC:

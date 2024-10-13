@@ -40,10 +40,10 @@ add address=192.168.4.2/30 interface=ether3
 add address=192.168.30.1/24 interface=ether5
 
 /ip pool
-add name=brl_pool30 ranges=192.168.30.2-192.168.30.25
+add name=BRL_pool30 ranges=192.168.30.2-192.168.30.25
 
 /ip dhcp-server
-add name=brl_server address-pool=brl_pool30 interface=ether5 disabled=no
+add name=BRL_server address-pool=BRL_pool30 interface=ether5 disabled=no
 
 /ip route
 add distance=1 dst-address=192.168.10.0/24 gateway=192.168.4.1

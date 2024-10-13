@@ -93,8 +93,8 @@ add distance=1 dst-address=192.168.30.0/24 gateway=192.168.3.2
 (docker exec -it [id docker] sh)
 
 ```
-udhcpc -i eth3
-ifconfig eth3 up
+udhcpc -i eth2
+ifconfig eth2 up
 ```
 
 ### Результаты пингов: 

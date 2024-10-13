@@ -34,64 +34,59 @@ Date of finished: 16.10.2024
 
 ### RO1_BRL:
 ```
-/interface vlan
-add name=RO_vlan10 vlan-id=10 interface=ether4 disabled=no
-add name=RO_vlan20 vlan-id=20 interface=ether4 disabled=no
-
 /ip address
-add address=192.168.10.1/24 interface=RO_vlan10 
-add address=192.168.20.1/24 interface=RO_vlan20 
-
-/ip dhcp-server network
-add address=192.168.10.0/24 gateway=192.168.10.1
-add address=192.168.20.0/24 gateway=192.168.20.1
+add address=192.168.3.2/30 interface=ether4
+add address=192.168.4.2/30 interface=ether3
+add address=192.168.30.1/24 interface=ether5
 
 /ip pool
-add name=pool_vlan10 ranges=192.168.10.10-192.168.10.250
-add name=pool_vlan20 ranges=192.168.20.10-192.168.20.250
+add name=brl_pool30 ranges=192.168.30.2-192.168.30.25
 
 /ip dhcp-server
-add name=server10 address-pool=pool_vlan10 interface=RO_vlan10 disabled=no
-add name=server20 address-pool=pool_vlan20 interface=RO_vlan20 disabled=no
+add name=brl_server address-pool=brl_pool30 interface=ether5 disabled=no
+
+/ip route
+add distance=1 dst-address=192.168.10.0/24 gateway=192.168.4.1
+add distance=1 dst-address=192.168.20.0/24 gateway=192.168.3.1
+
 ```
 
 ### RO1_MSK:
 ```
-/interface vlan
-add name=SW1_vlan10_1 vlan-id=10 interface=ether4 disabled=no
-add name=SW1_vlan10_2 vlan-id=10 interface=ether5 disabled=no
-add name=SW1_vlan20_1 vlan-id=20 interface=ether4 disabled=no
-add name=SW1_vlan20_2 vlan-id=20 interface=ether6 disabled=no
+/ip address
+add address=192.168.2.1/30 interface=ether4
+add address=192.168.4.1/30 interface=ether3
+add address=192.168.10.1/24 interface=ether5
 
-/interface bridge
-add name=SW1_br10
-add name=SW1_br20
+/ip pool
+add name=MSK_pool10 ranges=192.168.10.2-192.168.10.25
 
-/interface bridge port
-add interface=SW1_vlan10_1 bridge=SW1_br10
-add interface=SW1_vlan10_2 bridge=SW1_br10
-add interface=SW1_vlan20_1 bridge=SW1_br20
-add interface=SW1_vlan20_2 bridge=SW1_br20
+/ip dhcp-server
+add name=MSK_server address-pool=MSK_pool10 interface=ether5 disabled=no
 
-/ip dhcp-client
-add interface=SW1_br10 disabled=no
-add interface=SW1_br20 disabled=no
+/ip route
+add distance=1 dst-address=192.168.20.0/24 gateway=192.168.2.2
+add distance=1 dst-address=192.168.30.0/24 gateway=192.168.4.2
+
 ```
 
 ### RO1_FRT:
 ```
-/interface vlan
-add name=SW2_1_vlan10 vlan-id=10 interface=ether4 disabled=no
+/ip address
+add address=192.168.2.2/30 interface=ether4
+add address=192.168.3.1/30 interface=ether3
+add address=192.168.20.1/24 interface=ether5
 
-/interface bridge
-add name=SW2_1_br10
+/ip pool
+add name=FRT_pool20 ranges=192.168.20.2-192.168.20.25
 
-/interface bridge port
-add interface=SW2_1_vlan10 bridge=SW2_1_br10
-add interface=ether5 bridge=SW2_1_br10
+/ip dhcp-server
+add name=FRT_server address-pool=FRT_pool20 interface=ether5 disabled=no
 
-/ip dhcp-client
-add interface=SW2_1_br10 disabled=no
+/ip route
+add distance=1 dst-address=192.168.10.0/24 gateway=192.168.2.1
+add distance=1 dst-address=192.168.30.0/24 gateway=192.168.3.2
+
 ```
 
 Настройка PC:

@@ -99,23 +99,7 @@ ifconfig eth2 up
 
 ### Результаты пингов: 
 
-На скриншотах видно, что PC имеют друг к другу доступ благодаря маршрутизации, при этом SW2_1 (vlan10) не имеет доступа к PC2 (vlan20), а SW2_2 (vlan20) к PC1 (vlan10).
-
-### RO:
-
-<img src="./pic/RO_ping.jpg" style="width:350px;">
-
-### SW1:
-
-<img src="./pic/SW1_ping.jpg" style="width:350px;">
-
-### SW2_1:
-
-<img src="./pic/SW2_1_ping.jpg" style="width:350px;">
-
-### SW2_2:
-
-<img src="./pic/SW2_2_ping.jpg" style="width:350px;">
+На скриншотах видно, что PC имеют друг к другу доступ благодаря статической маршрутизации.
 
 ### PC1:
 
@@ -124,4 +108,8 @@ ifconfig eth2 up
 ### PC2:
 
 <img src="./pic/PC2_ping.jpg" style="width:350px;">
+
+### PC3:
+
+<img src="./pic/PC3_ping.jpg" style="width:350px;">
 

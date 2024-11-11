@@ -185,15 +185,16 @@ add bridge=EoMPLS_br interface=ether5
 add bridge=EoMPLS_br interface=EoMPLS
 ```
 
-
-
-Настройка PC:
-(docker exec -it [id docker] sh)
-
+### PC1:
 ```
-udhcpc -i eth2
-ifconfig eth2 up
+/ip address add address=192.168.30.10/24 interface=ether3
 ```
+
+### SGI_Prims:
+```
+/ip address add address=192.168.40.10/24 interface=ether3
+```
+
 
 ### Результаты пингов: 
 

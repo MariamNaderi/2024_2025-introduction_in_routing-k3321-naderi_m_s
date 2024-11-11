@@ -32,35 +32,6 @@ Date of finished: 13.11.2024
 Далее были настроены все роутеры с помощью следующих команд:
 (ssh admin@[ip-адрес]; пароль -- admin)
 
-### RO1_SPB:
-```
-/interface bridge
-add name=loopback
-
-/ip address
-add address=192.168.6.2/30 interface=ether3
-add address=192.168.7.2/30 interface=ether4
-add address=192.168.10.6/32 interface=loopback
-
-/mpls ldp
-set enabled=yes transport-address=192.168.10.6
-/mpls ldp interface
-add interface=ether3
-add interface=ether4
-
-/routing ospf instance
-set 0 router-id=192.168.10.6
-/routing ospf network
-add area=backbone
-
-/interface bridge
-add name=EoMPLS_br
-/interface vpls
-add name=EoMPLS cisco-style-id=300 remote-peer=192.168.10.1 cisco-style=yes disabled=no
-/interface bridge port
-add bridge=EoMPLS_br interface=ether5
-add bridge=EoMPLS_br interface=EoMPLS
-```
 
 ### RO1_NY:
 ```
@@ -183,6 +154,38 @@ set 0 router-id=192.168.10.5
 /routing ospf network
 add area=backbone
 ```
+
+### RO1_SPB:
+```
+/interface bridge
+add name=loopback
+
+/ip address
+add address=192.168.6.2/30 interface=ether3
+add address=192.168.7.2/30 interface=ether4
+add address=192.168.10.6/32 interface=loopback
+
+/mpls ldp
+set enabled=yes transport-address=192.168.10.6
+/mpls ldp interface
+add interface=ether3
+add interface=ether4
+
+/routing ospf instance
+set 0 router-id=192.168.10.6
+/routing ospf network
+add area=backbone
+
+/interface bridge
+add name=EoMPLS_br
+/interface vpls
+add name=EoMPLS cisco-style-id=300 remote-peer=192.168.10.1 cisco-style=yes disabled=no
+/interface bridge port
+add bridge=EoMPLS_br interface=ether5
+add bridge=EoMPLS_br interface=EoMPLS
+```
+
+
 
 Настройка PC:
 (docker exec -it [id docker] sh)

@@ -42,12 +42,14 @@ add name=loopback
 add address=192.168.1.1/30 interface=ether3
 add address=192.168.2.1/30 interface=ether4
 add address=192.168.10.1/32 interface=loopback
+add address=192.168.8.1/30 interface=ether5
 
 /mpls ldp
 set enabled=yes transport-address=192.168.10.1
 /mpls ldp interface
 add interface=ether3
 add interface=ether4
+add interface=ether5
 
 /routing ospf instance
 set 0 router-id=192.168.10.1
@@ -164,12 +166,14 @@ add name=loopback
 add address=192.168.6.2/30 interface=ether3
 add address=192.168.7.2/30 interface=ether4
 add address=192.168.10.6/32 interface=loopback
+add address=192.168.9.1/30 interface=ether5
 
 /mpls ldp
 set enabled=yes transport-address=192.168.10.6
 /mpls ldp interface
 add interface=ether3
 add interface=ether4
+add interface=ether5
 
 /routing ospf instance
 set 0 router-id=192.168.10.6

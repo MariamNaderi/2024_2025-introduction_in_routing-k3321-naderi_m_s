@@ -37,15 +37,17 @@ Date of finished: 13.11.2024
 ```
 /interface bridge
 add name=loopback
+add name=EoMPLS_br
 
 /ip address
-add address=192.168.1.1/30 interface=ether3
-add address=192.168.2.1/30 interface=ether4
+add address=1.1.1.1/30 interface=ether3
+add address=1.1.2.1/30 interface=ether4
+add address=1.1.8.1/30 interface=ether5
 add address=192.168.10.1/32 interface=loopback
-add address=192.168.8.1/30 interface=ether5
+add address=100.1.3.1/24 interface=EoMPLS_br 
 
 /mpls ldp
-set enabled=yes transport-address=192.168.10.1
+set enabled=yes lsr-id=192.168.10.1 transport-address=192.168.10.1
 /mpls ldp interface
 add interface=ether3
 add interface=ether4
@@ -53,13 +55,13 @@ add interface=ether5
 
 /routing ospf instance
 set 0 router-id=192.168.10.1
+
 /routing ospf network
 add area=backbone
 
-/interface bridge
-add name=EoMPLS_br
 /interface vpls
-add name=EoMPLS cisco-style-id=300 remote-peer=192.168.10.6 cisco-style=yes disabled=no
+add name=EoMPLS vpls-id=300:300 remote-peer=192.168.10.6 disabled=no
+
 /interface bridge port
 add bridge=EoMPLS_br interface=ether5
 add bridge=EoMPLS_br interface=EoMPLS
@@ -71,12 +73,12 @@ add bridge=EoMPLS_br interface=EoMPLS
 add name=loopback
 
 /ip address
-add address=192.168.1.2/30 interface=ether3
-add address=192.168.3.1/30 interface=ether4
+add address=1.1.1.2/30 interface=ether3
+add address=1.1.3.1/30 interface=ether4
 add address=192.168.10.2/32 interface=loopback
 
 /mpls ldp
-set enabled=yes transport-address=192.168.10.2
+set enabled=yes lsr-id=192.168.10.2 transport-address=192.168.10.2
 /mpls ldp interface
 add interface=ether3
 add interface=ether4
@@ -93,13 +95,13 @@ add area=backbone
 add name=loopback
 
 /ip address
-add address=192.168.5.1/30 interface=ether3
-add address=192.168.2.2/30 interface=ether4
-add address=192.168.4.1/30 interface=ether5
+add address=1.1.5.1/30 interface=ether3
+add address=1.1.2.2/30 interface=ether4
+add address=1.1.4.1/30 interface=ether5
 add address=192.168.10.3/32 interface=loopback
 
 /mpls ldp
-set enabled=yes transport-address=192.168.10.3
+set enabled=yes lsr-id=192.168.10.3 transport-address=192.168.10.3
 /mpls ldp interface
 add interface=ether3
 add interface=ether4
@@ -117,13 +119,13 @@ add area=backbone
 add name=loopback
 
 /ip address
-add address=192.168.6.1/30 interface=ether3
-add address=192.168.3.2/30 interface=ether4
-add address=192.168.4.2/30 interface=ether5
+add address=1.1.6.1/30 interface=ether3
+add address=1.1.3.2/30 interface=ether4
+add address=1.1.4.2/30 interface=ether5
 add address=192.168.10.4/32 interface=loopback
 
 /mpls ldp
-set enabled=yes transport-address=192.168.10.4
+set enabled=yes lsr-id=192.168.10.4 transport-address=192.168.10.4
 /mpls ldp interface
 add interface=ether3
 add interface=ether4
@@ -141,12 +143,12 @@ add area=backbone
 add name=loopback
 
 /ip address
-add address=192.168.5.2/30 interface=ether3
-add address=192.168.7.1/30 interface=ether4
+add address=1.1.5.2/30 interface=ether3
+add address=1.1.7.1/30 interface=ether4
 add address=192.168.10.5/32 interface=loopback
 
 /mpls ldp
-set enabled=yes transport-address=192.168.10.5
+set enabled=yes lsr-id=192.168.10.5 transport-address=192.168.10.5
 /mpls ldp interface
 add interface=ether3
 add interface=ether4
@@ -161,12 +163,14 @@ add area=backbone
 ```
 /interface bridge
 add name=loopback
+add name=EoMPLS_br
 
 /ip address
-add address=192.168.6.2/30 interface=ether3
-add address=192.168.7.2/30 interface=ether4
+add address=1.1.6.2/30 interface=ether3
+add address=1.1.7.2/30 interface=ether4
+add address=1.1.9.1/30 interface=ether5
 add address=192.168.10.6/32 interface=loopback
-add address=192.168.9.1/30 interface=ether5
+add address=100.1.4.1/24 interface=EoMPLS_br
 
 /mpls ldp
 set enabled=yes transport-address=192.168.10.6
@@ -180,10 +184,8 @@ set 0 router-id=192.168.10.6
 /routing ospf network
 add area=backbone
 
-/interface bridge
-add name=EoMPLS_br
 /interface vpls
-add name=EoMPLS cisco-style-id=300 remote-peer=192.168.10.1 cisco-style=yes disabled=no
+add name=EoMPLS vpls-id=300:300 remote-peer=192.168.10.1 disabled=no
 /interface bridge port
 add bridge=EoMPLS_br interface=ether5
 add bridge=EoMPLS_br interface=EoMPLS
@@ -191,12 +193,12 @@ add bridge=EoMPLS_br interface=EoMPLS
 
 ### PC1:
 ```
-/ip address add address=192.168.30.10/24 interface=ether3
+ip add add 100.1.1.2/24 dev eth0
 ```
 
 ### SGI_Prims:
 ```
-/ip address add address=192.168.40.10/24 interface=ether3
+ip add add 100.1.2.2/24 dev eth0
 ```
 
 

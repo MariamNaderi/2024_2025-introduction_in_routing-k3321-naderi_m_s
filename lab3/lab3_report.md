@@ -173,7 +173,7 @@ add address=192.168.10.6/32 interface=loopback
 add address=100.1.4.1/24 interface=EoMPLS_br
 
 /mpls ldp
-set enabled=yes transport-address=192.168.10.6
+set enabled=yes lsr-id=192.168.10.5 transport-address=192.168.10.6
 /mpls ldp interface
 add interface=ether3
 add interface=ether4

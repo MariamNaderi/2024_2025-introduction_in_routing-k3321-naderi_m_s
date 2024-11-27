@@ -1,0 +1,56 @@
+name: lab-3
+mgmt:
+  network: statics
+  ipv4-subnet: 192.168.20.0/24
+  
+topology:
+  nodes:
+    R01_NY:
+      kind: vr-mikrotik_ros
+      image: vrnetlab/mikrotik_routeros:6.47.9 
+      mgmt-ipv4: 192.168.20.3
+      
+    R01_LND:
+      kind: vr-mikrotik_ros
+      image: vrnetlab/mikrotik_routeros:6.47.9 
+      mgmt-ipv4: 192.168.20.4
+      
+    R01_LBN:
+      kind: vr-mikrotik_ros
+      image: vrnetlab/mikrotik_routeros:6.47.9 
+      mgmt-ipv4: 192.168.20.5
+      
+    R01_HKI:
+      kind: vr-mikrotik_ros
+      image: vrnetlab/mikrotik_routeros:6.47.9 
+      mgmt-ipv4: 192.168.20.6
+      
+    R01_MSC:
+      kind: vr-mikrotik_ros
+      image: vrnetlab/mikrotik_routeros:6.47.9 
+      mgmt-ipv4: 192.168.20.7
+      
+    R01_SPB:
+      kind: vr-mikrotik_ros
+      image: vrnetlab/mikrotik_routeros:6.47.9 
+      mgmt-ipv4: 192.168.20.8
+    
+    PC1:
+      kind: linux
+      image: alpine
+      mgmt-ipv4: 192.168.20.9
+      
+    SGI_Prism:
+      kind: linux
+      image: alpine
+      mgmt-ipv4: 192.168.20.10
+  links:
+    - endpoints: ["R01_NY:eth2", "R01_LND:eth2"]
+    - endpoints: ["R01_NY:eth3", "R01_LBN:eth3"]
+    - endpoints: ["R01_NY:eth4", "SGI_Prism:eth2"]
+    - endpoints: ["R01_LND:eth3", "R01_HKI:eth3"]
+    - endpoints: ["R01_LBN:eth2", "R01_MSC:eth2"]
+    - endpoints: ["R01_LBN:eth4", "R01_HKI:eth4"]
+    - endpoints: ["R01_HKI:eth2", "R01_SPB:eth2"]
+    - endpoints: ["R01_MSC:eth3", "R01_SPB:eth3"]
+    - endpoints: ["R01_SPB:eth4", "PC1:eth2"]

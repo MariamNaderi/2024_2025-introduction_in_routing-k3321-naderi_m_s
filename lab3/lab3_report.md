@@ -243,4 +243,4 @@ ip add add 100.1.20.10/24 dev eth0
 
 ### Трассировка:
 
-<img src="./pic/trace.PNG" style="width:450px;">
+<img src="./pic/trace.PNG" style="width:1450px;">

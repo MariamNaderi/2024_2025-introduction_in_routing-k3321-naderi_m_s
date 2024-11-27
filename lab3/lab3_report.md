@@ -207,7 +207,7 @@ ip add add 100.1.20.10/24 dev eth0
 
 ### PC -> SGI Prims:
 
-<img src="./pic/pic7.png" style="width:350px;">
+<img src="./pic/pic7.PNG" style="width:350px;">
 
 ### SGI Prims -> PC:
 

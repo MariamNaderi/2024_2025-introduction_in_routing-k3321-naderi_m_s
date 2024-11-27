@@ -39,12 +39,21 @@ Date of finished: 13.11.2024
 add name=loopback
 add name=EoMPLS_br
 
+/interface vpls
+add disabled=no name=EoMPLS remote-peer=192.168.10.6 vpls-id=100:100
+
+/routing ospf instance
+set 0 router-id=192.168.10.1
+/interface bridge port
+add bridge=EoMPLS_br interface=ether5
+add bridge=EoMPLS_br interface=EoMPLS
+
 /ip address
-add address=1.1.1.1/30 interface=ether3
-add address=1.1.2.1/30 interface=ether4
-add address=1.1.8.1/30 interface=ether5
 add address=192.168.10.1/32 interface=loopback
-add address=100.1.3.1/24 interface=EoMPLS_br 
+add address=3.3.1.1/30 interface=ether3 
+add address=3.3.2.1/30 interface=ether4
+add address=3.3.8.1/30 interface=ether5 
+add address=100.1.30.10/24 interface=EoMPLS_br 
 
 /mpls ldp
 set enabled=yes lsr-id=192.168.10.1 transport-address=192.168.10.1
@@ -52,19 +61,8 @@ set enabled=yes lsr-id=192.168.10.1 transport-address=192.168.10.1
 add interface=ether3
 add interface=ether4
 add interface=ether5
-
-/routing ospf instance
-set 0 router-id=192.168.10.1
-
 /routing ospf network
-add area=backbone
-
-/interface vpls
-add name=EoMPLS vpls-id=300:300 remote-peer=192.168.10.6 disabled=no
-
-/interface bridge port
-add bridge=EoMPLS_br interface=ether5
-add bridge=EoMPLS_br interface=EoMPLS
+add area=backbone 
 ```
 
 ### RO1_LND:
@@ -72,10 +70,13 @@ add bridge=EoMPLS_br interface=EoMPLS
 /interface bridge
 add name=loopback
 
+/routing ospf instance
+set 0 router-id=192.168.10.2
+
 /ip address
-add address=1.1.1.2/30 interface=ether3
-add address=1.1.3.1/30 interface=ether4
-add address=192.168.10.2/32 interface=loopback
+add address=192.168.10.2/32 interface=loopback 
+add address=3.3.1.2/30 interface=ether3
+add address=3.3.3.1/30 interface=ether4 
 
 /mpls ldp
 set enabled=yes lsr-id=192.168.10.2 transport-address=192.168.10.2
@@ -83,8 +84,6 @@ set enabled=yes lsr-id=192.168.10.2 transport-address=192.168.10.2
 add interface=ether3
 add interface=ether4
 
-/routing ospf instance
-set 0 router-id=192.168.10.2
 /routing ospf network
 add area=backbone
 ```
@@ -94,11 +93,14 @@ add area=backbone
 /interface bridge
 add name=loopback
 
+/routing ospf instance
+set 0 router-id=192.168.10.3
+
 /ip address
-add address=1.1.5.1/30 interface=ether3
-add address=1.1.2.2/30 interface=ether4
-add address=1.1.4.1/30 interface=ether5
 add address=192.168.10.3/32 interface=loopback
+add address=3.3.5.1/30 interface=ether3 
+add address=3.3.2.2/30 interface=ether4
+add address=3.3.4.1/30 interface=ether5
 
 /mpls ldp
 set enabled=yes lsr-id=192.168.10.3 transport-address=192.168.10.3
@@ -107,8 +109,6 @@ add interface=ether3
 add interface=ether4
 add interface=ether5
 
-/routing ospf instance
-set 0 router-id=192.168.10.3
 /routing ospf network
 add area=backbone
 ```
@@ -118,11 +118,14 @@ add area=backbone
 /interface bridge
 add name=loopback
 
+/routing ospf instance
+set 0 router-id=192.168.10.4
+
 /ip address
-add address=1.1.6.1/30 interface=ether3
-add address=1.1.3.2/30 interface=ether4
-add address=1.1.4.2/30 interface=ether5
-add address=192.168.10.4/32 interface=loopback
+add address=192.168.10.4/32 interface=loopback 
+add address=3.3.6.1/30 interface=ether3
+add address=3.3.3.2/30 interface=ether4
+add address=3.3.4.2/30 interface=ether5
 
 /mpls ldp
 set enabled=yes lsr-id=192.168.10.4 transport-address=192.168.10.4
@@ -131,8 +134,6 @@ add interface=ether3
 add interface=ether4
 add interface=ether5
 
-/routing ospf instance
-set 0 router-id=192.168.10.4
 /routing ospf network
 add area=backbone
 ```
@@ -142,10 +143,13 @@ add area=backbone
 /interface bridge
 add name=loopback
 
+/routing ospf instance
+set 0 router-id=192.168.10.5
+
 /ip address
-add address=1.1.5.2/30 interface=ether3
-add address=1.1.7.1/30 interface=ether4
-add address=192.168.10.5/32 interface=loopback
+add address=192.168.10.5/32 interface=loopback 
+add address=3.3.5.2/30 interface=ether3
+add address=3.3.7.1/30 interface=ether4 
 
 /mpls ldp
 set enabled=yes lsr-id=192.168.10.5 transport-address=192.168.10.5
@@ -153,8 +157,6 @@ set enabled=yes lsr-id=192.168.10.5 transport-address=192.168.10.5
 add interface=ether3
 add interface=ether4
 
-/routing ospf instance
-set 0 router-id=192.168.10.5
 /routing ospf network
 add area=backbone
 ```
@@ -165,40 +167,39 @@ add area=backbone
 add name=loopback
 add name=EoMPLS_br
 
+/interface vpls
+add disabled=no name=EoMPLS remote-peer=192.168.10.1 vpls-id=100:100
+
+/routing ospf instance
+set 0 router-id=192.168.10.6
+/interface bridge port
+add bridge=EoMPLS_br interface=ether5
+add bridge=EoMPLS_br interface=EoMPLS
+
 /ip address
-add address=1.1.6.2/30 interface=ether3
-add address=1.1.7.2/30 interface=ether4
-add address=1.1.9.1/30 interface=ether5
 add address=192.168.10.6/32 interface=loopback
-add address=100.1.4.1/24 interface=EoMPLS_br
+add address=3.3.6.2/30 interface=ether3 
+add address=3.3.7.2/30 interface=ether4
+add address=3.3.9.1/30 interface=ether5 
+add address=100.1.30.10/24 interface=EoMPLS_br 
 
 /mpls ldp
-set enabled=yes lsr-id=192.168.10.5 transport-address=192.168.10.6
+set enabled=yes lsr-id=192.168.10.6 transport-address=192.168.10.6
 /mpls ldp interface
 add interface=ether3
 add interface=ether4
 add interface=ether5
-
-/routing ospf instance
-set 0 router-id=192.168.10.6
 /routing ospf network
-add area=backbone
-
-/interface vpls
-add name=EoMPLS vpls-id=300:300 remote-peer=192.168.10.1 disabled=no
-/interface bridge port
-add bridge=EoMPLS_br interface=ether5
-add bridge=EoMPLS_br interface=EoMPLS
+add area=backbone 
 ```
-
 ### PC1:
 ```
-ip add add 100.1.1.2/24 dev eth0
+ip add add 100.1.10.10/24 dev eth0
 ```
 
 ### SGI_Prims:
 ```
-ip add add 100.1.2.2/24 dev eth0
+ip add add 100.1.20.10/24 dev eth0
 ```
 
 

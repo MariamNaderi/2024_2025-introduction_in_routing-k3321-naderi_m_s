@@ -218,27 +218,27 @@ ip add add 100.1.20.10/24 dev eth0
 
 ### NY:
 
-<img src="./pic/pic1.PNG" style="width:450px;">
+<img src="./pic/pic1.PNG" style="width:1450px;">
 
 ### LND:
 
-<img src="./pic/pic2.PNG" style="width:450px;">
+<img src="./pic/pic2.PNG" style="width:1450px;">
 
 ### LBN:
 
-<img src="./pic/pic3.PNG" style="width:450px;">
+<img src="./pic/pic3.PNG" style="width:1450px;">
 
 ### HKI:
 
-<img src="./pic/pic4.PNG" style="width:450px;">
+<img src="./pic/pic4.PNG" style="width:1450px;">
 
 ### MSK:
 
-<img src="./pic/pic5.PNG" style="width:450px;">
+<img src="./pic/pic5.PNG" style="width:1450px;">
 
 ### SPB:
 
-<img src="./pic/pic6.PNG" style="width:450px;">
+<img src="./pic/pic6.PNG" style="width:1450px;">
 
 
 ### Трассировка:

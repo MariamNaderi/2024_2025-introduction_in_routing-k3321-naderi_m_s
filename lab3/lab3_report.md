@@ -207,40 +207,40 @@ ip add add 100.1.20.10/24 dev eth0
 
 ### PC -> SGI Prims:
 
-<img src="./pic/pic7.PNG" style="width:350px;">
+<img src="./pic/pic7.PNG" style="width:450px;">
 
 ### SGI Prims -> PC:
 
-<img src="./pic/pic8.png" style="width:350px;">
+<img src="./pic/pic8.PNG" style="width:450px;">
 
 
 ### Проверки протоколов: 
 
 ### NY:
 
-<img src="./pic/pic1.png" style="width:350px;">
+<img src="./pic/pic1.PNG" style="width:450px;">
 
 ### LND:
 
-<img src="./pic/pic2.png" style="width:350px;">
+<img src="./pic/pic2.PNG" style="width:450px;">
 
 ### LBN:
 
-<img src="./pic/pic3.png" style="width:350px;">
+<img src="./pic/pic3.PNG" style="width:450px;">
 
 ### HKI:
 
-<img src="./pic/pic4.png" style="width:350px;">
+<img src="./pic/pic4.PNG" style="width:450px;">
 
 ### MSK:
 
-<img src="./pic/pic5.png" style="width:350px;">
+<img src="./pic/pic5.PNG" style="width:450px;">
 
 ### SPB:
 
-<img src="./pic/pic6.png" style="width:350px;">
+<img src="./pic/pic6.PNG" style="width:450px;">
 
 
 ### Трассировка:
 
-<img src="./pic/trace.png" style="width:350px;">
+<img src="./pic/trace.PNG" style="width:450px;">

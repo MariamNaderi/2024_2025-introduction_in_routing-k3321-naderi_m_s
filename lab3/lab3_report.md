@@ -205,17 +205,42 @@ ip add add 100.1.20.10/24 dev eth0
 
 ### Результаты пингов: 
 
-На скриншотах видно, что PC имеют друг к другу доступ благодаря статической маршрутизации.
+### PC -> SGI Prims:
 
-### PC1:
+<img src="./pic/pic7.jpg" style="width:350px;">
 
-<img src="./pic/PC1_ping.jpg" style="width:350px;">
+### SGI Prims -> PC:
 
-### PC2:
+<img src="./pic/pic8.jpg" style="width:350px;">
 
-<img src="./pic/PC2_ping.jpg" style="width:350px;">
 
-### PC3:
+### Проверки протоколов: 
 
-<img src="./pic/PC3_ping.jpg" style="width:350px;">
+### NY:
 
+<img src="./pic/pic1.jpg" style="width:350px;">
+
+### LND:
+
+<img src="./pic/pic2.jpg" style="width:350px;">
+
+### LBN:
+
+<img src="./pic/pic3.jpg" style="width:350px;">
+
+### HKI:
+
+<img src="./pic/pic4.jpg" style="width:350px;">
+
+### MSK:
+
+<img src="./pic/pic5.jpg" style="width:350px;">
+
+### SPB:
+
+<img src="./pic/pic6.jpg" style="width:350px;">
+
+
+### Трассировка:
+
+<img src="./pic/trace.jpg" style="width:350px;">

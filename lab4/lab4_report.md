@@ -78,7 +78,7 @@ add name=loopback
 add address=3.3.1.2/30 interface=ether3 
 add address=3.3.2.1/30 interface=ether4 
 add address=3.3.3.1/30 interface=ether5 
-add address=192.168.10.2 interface=loopback 
+add address=192.168.10.2/32 interface=loopback 
 
 /routing ospf instance
 set [ find default=yes ] router-id=192.168.10.2
@@ -112,7 +112,7 @@ add name=loopback
 add address=3.3.2.2/30 interface=ether3 
 add address=3.3.5.2/30 interface=ether4 
 add address=3.3.6.1/30 interface=ether5 
-add address=192.168.10.3 interface=loopback 
+add address=192.168.10.3/32 interface=loopback 
 
 /routing ospf instance
 set [ find default=yes ] router-id=192.168.10.3
@@ -181,7 +181,7 @@ add name=loopback
 add address=3.3.3.2/30 interface=ether3 
 add address=3.3.5.1/30 interface=ether4 
 add address=3.3.4.1/30 interface=ether5 
-add address=192.168.10.5 interface=loopback 
+add address=192.168.10.5/32 interface=loopback 
 
 /routing ospf instance
 set [ find default=yes ] router-id=192.168.10.5

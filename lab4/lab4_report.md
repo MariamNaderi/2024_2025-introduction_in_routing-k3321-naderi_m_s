@@ -32,40 +32,41 @@ Date of finished:
 Далее были настроены все роутеры с помощью следующих команд:
 (ssh admin@[ip-адрес]; пароль -- admin)
 
+## Часть 1
 
 ### RO1_NY:
 ```
 /interface bridge
 add name=loopback
-/interface wireless security-profiles
-set [ find default=yes ] supplicant-identity=MikroTik
-/routing bgp instance
-set default router-id=10.10.10.1
-/routing ospf instance
-set [ find default=yes ] router-id=10.10.10.1
+
 /ip address
-add address=172.31.255.30/30 interface=ether1 network=172.31.255.28
-add address=10.0.1.1/30 interface=ether2 network=10.0.1.0
-add address=192.168.20.1/24 interface=ether3 network=192.168.20.0
-add address=10.10.10.1 interface=loopback network=10.10.10.1
-/ip dhcp-client
-add disabled=no interface=ether1
-/ip route vrf
-add export-route-targets=65530:777 import-route-targets=65530:777 interfaces=ether3 \
-    route-distinguisher=65530:777 routing-mark=VRF_DEVOPS
-/mpls ldp
-set enabled=yes transport-address=10.10.10.1
-/mpls ldp interface
-add interface=ether2
-/routing bgp instance vrf
-add redistribute-connected=yes routing-mark=VRF_DEVOPS
-/routing bgp peer
-add address-families=ip,l2vpn,l2vpn-cisco,vpnv4 name=peer1 remote-address=10.10.10.2 remote-as=\
-    65530 update-source=loopback
+add address=3.3.1.1/30 interface=ether3 
+add address=192.168.40.10/24 interface=ether4 
+add address=192.168.10.1/32 interface=loopback 
+
+
+/routing ospf instance
+set [ find default=yes ] router-id=192.168.10.1
 /routing ospf network
 add area=backbone
-/system identity
-set name=R01.NY
+
+/mpls ldp
+set enabled=yes lsr-id=192.168.10.1 transport-address=192.168.10.1
+/mpls ldp interface
+add interface=ether3
+
+
+/ip route vrf
+add export-route-targets=65500:333 import-route-targets=65530:777 interfaces=ether3 \
+    route-distinguisher=65500:333 routing-mark=VRF_DEVOPS
+
+/routing bgp instance
+set default as=65500 router-id=192.168.10.1
+/routing bgp instance vrf
+add redistribute-connected=yes redistribute-ospf=yes routing-mark=VRF_DEVOPS
+/routing bgp peer
+add address-families=vpnv4 name=peer_LND remote-address=192.168.10.2 remote-as=\
+    65500 update-source=loopback
 ```
 
 ### RO1_LND:
@@ -146,35 +147,35 @@ set name=R01.LBN
 ```
 /interface bridge
 add name=loopback
-/interface wireless security-profiles
-set [ find default=yes ] supplicant-identity=MikroTik
-/routing bgp instance
-set default router-id=10.10.10.5
-/routing ospf instance
-set [ find default=yes ] router-id=10.10.10.5
+
 /ip address
-add address=172.31.255.30/30 interface=ether1 network=172.31.255.28
-add address=10.0.5.2/30 interface=ether2 network=10.0.5.0
-add address=192.168.30.1/24 interface=ether3 network=192.168.30.0
-add address=10.10.10.5 interface=loopback network=10.10.10.5
-/ip dhcp-client
-add disabled=no interface=ether1
-/ip route vrf
-add export-route-targets=65530:777 import-route-targets=65530:777 interfaces=ether3 \
-    route-distinguisher=65530:777 routing-mark=VRF_DEVOPS
-/mpls ldp
-set enabled=yes transport-address=10.10.10.5
-/mpls ldp interface
-add interface=ether2
-/routing bgp instance vrf
-add redistribute-connected=yes routing-mark=VRF_DEVOPS
-/routing bgp peer
-add address-families=ip,l2vpn,l2vpn-cisco,vpnv4 name=peer5 remote-address=10.10.10.3 remote-as=\
-    65530 update-source=loopback
+add address=3.3.6.2/30 interface=ether3 
+add address=192.168.50.10/24 interface=ether4 
+add address=192.168.10.4/32 interface=loopback 
+
+
+/routing ospf instance
+set [ find default=yes ] router-id=192.168.10.4
 /routing ospf network
 add area=backbone
-/system identity
-set name=R01.SVL
+
+/mpls ldp
+set enabled=yes lsr-id=192.168.10.4 transport-address=192.168.10.4
+/mpls ldp interface
+add interface=ether3
+
+
+/ip route vrf
+add export-route-targets=65500:333 import-route-targets=65530:777 interfaces=ether3 \
+    route-distinguisher=65500:333 routing-mark=VRF_DEVOPS
+
+/routing bgp instance
+set default as=65500 router-id=192.168.10.4
+/routing bgp instance vrf
+add redistribute-connected=yes redistribute-ospf=yes routing-mark=VRF_DEVOPS
+/routing bgp peer
+add address-families=vpnv4 name=peer_LBN remote-address=192.168.10.3 remote-as=\
+    65500 update-source=loopback
 ```
 
 ### RO1_HKI:
@@ -218,36 +219,37 @@ set name=R01.HKI
 ```
 /interface bridge
 add name=loopback
-/interface wireless security-profiles
-set [ find default=yes ] supplicant-identity=MikroTik
-/routing bgp instance
-set default router-id=10.10.10.6
-/routing ospf instance
-set [ find default=yes ] router-id=10.10.10.6
+
 /ip address
-add address=172.31.255.30/30 interface=ether1 network=172.31.255.28
-add address=10.0.6.2/30 interface=ether2 network=10.0.6.0
-add address=192.168.10.1/24 interface=ether3 network=192.168.10.0
-add address=10.10.10.6 interface=loopback network=10.10.10.6
-/ip dhcp-client
-add disabled=no interface=ether1
-/ip route vrf
-add export-route-targets=65530:777 import-route-targets=65530:777 interfaces=ether3 \
-    route-distinguisher=65530:777 routing-mark=VRF_DEVOPS
-/mpls ldp
-set enabled=yes transport-address=10.10.10.6
-/mpls ldp interface
-add interface=ether2
-/routing bgp instance vrf
-add redistribute-connected=yes routing-mark=VRF_DEVOPS
-/routing bgp peer
-add address-families=ip,l2vpn,l2vpn-cisco,vpnv4 name=peer6 remote-address=10.10.10.4 remote-as=\
-    65530 update-source=loopback
+add address=3.3.4.2/30 interface=ether3 
+add address=192.168.30.10/24 interface=ether4 
+add address=192.168.10.6/32 interface=loopback 
+
+
+/routing ospf instance
+set [ find default=yes ] router-id=192.168.10.6
 /routing ospf network
 add area=backbone
-/system identity
-set name=R01.SPB 
+
+/mpls ldp
+set enabled=yes lsr-id=192.168.10.6 transport-address=192.168.10.6
+/mpls ldp interface
+add interface=ether3
+
+
+/ip route vrf
+add export-route-targets=65500:333 import-route-targets=65530:777 interfaces=ether3 \
+    route-distinguisher=65500:333 routing-mark=VRF_DEVOPS
+
+/routing bgp instance
+set default as=65500 router-id=192.168.10.6
+/routing bgp instance vrf
+add redistribute-connected=yes redistribute-ospf=yes routing-mark=VRF_DEVOPS
+/routing bgp peer
+add address-families=vpnv4 name=peer_HKI remote-address=192.168.10.5 remote-as=\
+    65500 update-source=loopback
 ```
+
 ### PC1:
 ```
 ip add add 100.1.10.10/24 dev eth0

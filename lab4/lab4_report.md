@@ -57,7 +57,7 @@ add interface=ether3
 
 
 /ip route vrf
-add export-route-targets=65500:333 import-route-targets=65530:777 interfaces=ether3 \
+add export-route-targets=65500:333 import-route-targets=65530:333 interfaces=ether3 \
     route-distinguisher=65500:333 routing-mark=VRF_DEVOPS
 
 /routing bgp instance
@@ -160,7 +160,7 @@ add interface=ether3
 
 
 /ip route vrf
-add export-route-targets=65500:333 import-route-targets=65530:777 interfaces=ether3 \
+add export-route-targets=65500:333 import-route-targets=65530:333 interfaces=ether3 \
     route-distinguisher=65500:333 routing-mark=VRF_DEVOPS
 
 /routing bgp instance
@@ -229,7 +229,7 @@ add interface=ether3
 
 
 /ip route vrf
-add export-route-targets=65500:333 import-route-targets=65530:777 interfaces=ether3 \
+add export-route-targets=65500:333 import-route-targets=65530:333 interfaces=ether3 \
     route-distinguisher=65500:333 routing-mark=VRF_DEVOPS
 
 /routing bgp instance

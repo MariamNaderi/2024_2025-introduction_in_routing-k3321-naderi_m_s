@@ -40,13 +40,12 @@ Date of finished:
 add name=loopback
 
 /ip address
-add address=3.3.1.1/30 interface=ether3 
-add address=192.168.40.10/24 interface=ether4 
+add address=3.3.2.1/30 interface=ether3 
+add address=3.3.1.1/30 interface=ether4 
 add address=192.168.10.1/32 interface=loopback 
 
-
 /routing ospf instance
-set [ find default=yes ] router-id=192.168.10.1
+set 0 router-id=192.168.10.1
 /routing ospf network
 add area=backbone
 
@@ -54,19 +53,19 @@ add area=backbone
 set enabled=yes lsr-id=192.168.10.1 transport-address=192.168.10.1
 /mpls ldp interface
 add interface=ether3
-
+add interface=ether4
 
 /ip route vrf
-add export-route-targets=65500:333 import-route-targets=65500:333 interfaces=ether3 \
+add export-route-targets=65500:333 import-route-targets=65500:333 interfaces=ether4 \
     route-distinguisher=65500:333 routing-mark=VRF_DEVOPS
 
 /routing bgp instance
-set default as=65500 router-id=192.168.10.1
+set 0 as=65500 router-id=192.168.10.1
 /routing bgp instance vrf
 add redistribute-connected=yes redistribute-ospf=yes routing-mark=VRF_DEVOPS
 /routing bgp peer
-add address-families=vpnv4 name=peer_LND remote-address=192.168.10.2 remote-as=\
-    65500 update-source=loopback
+add address-families=vpnv4 name=peer_LND remote-address=192.168.10.2 \
+    remote-as=65500 update-source=loopback
 ```
 
 ### RO1_LND:
@@ -75,13 +74,13 @@ add address-families=vpnv4 name=peer_LND remote-address=192.168.10.2 remote-as=\
 add name=loopback
 
 /ip address
-add address=3.3.1.2/30 interface=ether3 
-add address=3.3.2.1/30 interface=ether4 
-add address=3.3.3.1/30 interface=ether5 
+add address=3.3.2.2/30 interface=ether3 
+add address=3.3.3.1/30 interface=ether4 
+add address=3.3.4.1/30 interface=ether5 
 add address=192.168.10.2/32 interface=loopback 
 
 /routing ospf instance
-set [ find default=yes ] router-id=192.168.10.2
+set 0 router-id=192.168.10.2
 /routing ospf network
 add area=backbone
 
@@ -93,14 +92,14 @@ add interface=ether4
 add interface=ether5
 
 /routing bgp instance
-set default as=65500 router-id=192.168.10.2
+set 0 as=65500 router-id=192.168.10.2
 /routing bgp peer
-add address-families=vpnv4 name=peer_NY remote-address=192.168.10.1 remote-as=\
-    65500 update-source=loopback
-add address-families=vpnv4 name=peer_LBN remote-address=192.168.10.3 remote-as=\
-    65500 update-source=loopback
-add address-families=vpnv4 name=peer_HKI remote-address=192.168.10.5 remote-as=\
-    65500 update-source=loopback
+add address-families=vpnv4 name=peer_NY remote-address=192.168.10.1 \
+    remote-as=65500 update-source=loopback
+add address-families=vpnv4 name=peer_LBN remote-address=192.168.10.3 \
+    remote-as=65500 update-source=loopback
+add address-families=vpnv4 name=peer_HKI remote-address=192.168.10.5 \
+    remote-as=65500 update-source=loopback
 ```
 
 ### RO1_LBN:
@@ -109,13 +108,13 @@ add address-families=vpnv4 name=peer_HKI remote-address=192.168.10.5 remote-as=\
 add name=loopback
 
 /ip address
-add address=3.3.2.2/30 interface=ether3 
+add address=3.3.3.2/30 interface=ether3 
 add address=3.3.5.2/30 interface=ether4 
-add address=3.3.6.1/30 interface=ether5 
+add address=3.3.8.1/30 interface=ether5 
 add address=192.168.10.3/32 interface=loopback 
 
 /routing ospf instance
-set [ find default=yes ] router-id=192.168.10.3
+set 0 router-id=192.168.10.3
 /routing ospf network
 add area=backbone
 
@@ -127,14 +126,14 @@ add interface=ether4
 add interface=ether5
 
 /routing bgp instance
-set default as=65500 router-id=192.168.10.3
+set 0 as=65500 router-id=192.168.10.3
 /routing bgp peer
-add address-families=vpnv4 name=peer_SVL remote-address=192.168.10.4 remote-as=\
-    65500 update-source=loopback
-add address-families=vpnv4 name=peer_LND remote-address=192.168.10.2 remote-as=\
-    65500 update-source=loopback
-add address-families=vpnv4 name=peer_HKI remote-address=192.168.10.5 remote-as=\
-    65500 update-source=loopback
+add address-families=vpnv4 name=peer_SVL remote-address=192.168.10.4 \
+    remote-as=65500 update-source=loopback
+add address-families=vpnv4 name=peer_LND remote-address=192.168.10.2 \
+    remote-as=65500 update-source=loopback
+add address-families=vpnv4 name=peer_HKI remote-address=192.168.10.5 \
+    remote-as=65500 update-source=loopback
 ```
 
 ### RO1_SVL:
@@ -143,13 +142,13 @@ add address-families=vpnv4 name=peer_HKI remote-address=192.168.10.5 remote-as=\
 add name=loopback
 
 /ip address
-add address=3.3.6.2/30 interface=ether3 
-add address=192.168.50.10/24 interface=ether4 
+add address=3.3.8.2/30 interface=ether3 
+add address=3.3.9.1/30 interface=ether4 
 add address=192.168.10.4/32 interface=loopback 
 
 
 /routing ospf instance
-set [ find default=yes ] router-id=192.168.10.4
+set 0 router-id=192.168.10.4
 /routing ospf network
 add area=backbone
 
@@ -157,19 +156,19 @@ add area=backbone
 set enabled=yes lsr-id=192.168.10.4 transport-address=192.168.10.4
 /mpls ldp interface
 add interface=ether3
-
+add interface=ether4
 
 /ip route vrf
-add export-route-targets=65500:333 import-route-targets=65500:333 interfaces=ether3 \
+add export-route-targets=65500:333 import-route-targets=65500:333 interfaces=ether4 \
     route-distinguisher=65500:333 routing-mark=VRF_DEVOPS
 
 /routing bgp instance
-set default as=65500 router-id=192.168.10.4
+set 0 as=65500 router-id=192.168.10.4
 /routing bgp instance vrf
 add redistribute-connected=yes redistribute-ospf=yes routing-mark=VRF_DEVOPS
 /routing bgp peer
-add address-families=vpnv4 name=peer_LBN remote-address=192.168.10.3 remote-as=\
-    65500 update-source=loopback
+add address-families=vpnv4 name=peer_LBN remote-address=192.168.10.3 \
+    remote-as=65500 update-source=loopback
 ```
 
 ### RO1_HKI:
@@ -178,13 +177,13 @@ add address-families=vpnv4 name=peer_LBN remote-address=192.168.10.3 remote-as=\
 add name=loopback
 
 /ip address
-add address=3.3.3.2/30 interface=ether3 
+add address=3.3.4.2/30 interface=ether3 
 add address=3.3.5.1/30 interface=ether4 
-add address=3.3.4.1/30 interface=ether5 
+add address=3.3.6.1/30 interface=ether5 
 add address=192.168.10.5/32 interface=loopback 
 
 /routing ospf instance
-set [ find default=yes ] router-id=192.168.10.5
+set 0 router-id=192.168.10.5
 /routing ospf network
 add area=backbone
 
@@ -196,14 +195,14 @@ add interface=ether4
 add interface=ether5
 
 /routing bgp instance
-set default as=65500 router-id=192.168.10.5
+set 0 as=65500 router-id=192.168.10.5
 /routing bgp peer
-add address-families=vpnv4 name=peer_LND remote-address=192.168.10.2 remote-as=\
-    65500 update-source=loopback
-add address-families=vpnv4 name=peer_LBN remote-address=192.168.10.3 remote-as=\
-    65500 update-source=loopback
-add address-families=vpnv4 name=peer_SPB remote-address=192.168.10.6 remote-as=\
-    65500 update-source=loopback
+add address-families=vpnv4 name=peer_LND remote-address=192.168.10.2 \
+    remote-as=65500 update-source=loopback
+add address-families=vpnv4 name=peer_LBN remote-address=192.168.10.3 \
+    remote-as=65500 update-source=loopback
+add address-families=vpnv4 name=peer_SPB remote-address=192.168.10.6 \
+    remote-as=65500 update-source=loopback
 ```
 
 ### RO1_SPB:
@@ -212,13 +211,13 @@ add address-families=vpnv4 name=peer_SPB remote-address=192.168.10.6 remote-as=\
 add name=loopback
 
 /ip address
-add address=3.3.4.2/30 interface=ether3 
-add address=192.168.30.10/24 interface=ether4 
+add address=3.3.6.2/30 interface=ether3 
+add address=3.3.7.1/30 interface=ether4 
 add address=192.168.10.6/32 interface=loopback 
 
 
 /routing ospf instance
-set [ find default=yes ] router-id=192.168.10.6
+set 0 router-id=192.168.10.6
 /routing ospf network
 add area=backbone
 
@@ -226,29 +225,36 @@ add area=backbone
 set enabled=yes lsr-id=192.168.10.6 transport-address=192.168.10.6
 /mpls ldp interface
 add interface=ether3
-
+add interface=ether4
 
 /ip route vrf
-add export-route-targets=65500:333 import-route-targets=65500:333 interfaces=ether3 \
+add export-route-targets=65500:333 import-route-targets=65500:333 interfaces=ether4 \
     route-distinguisher=65500:333 routing-mark=VRF_DEVOPS
 
 /routing bgp instance
-set default as=65500 router-id=192.168.10.6
+set 0 as=65500 router-id=192.168.10.6
 /routing bgp instance vrf
 add redistribute-connected=yes redistribute-ospf=yes routing-mark=VRF_DEVOPS
 /routing bgp peer
-add address-families=vpnv4 name=peer_HKI remote-address=192.168.10.5 remote-as=\
-    65500 update-source=loopback
+add address-families=vpnv4 name=peer_HKI remote-address=192.168.10.5 \
+    remote-as=65500 update-source=loopback
 ```
+
+## Часть 2
 
 ### PC1:
 ```
-ip add add 100.1.10.10/24 dev eth0
+ip add add 172.16.10.1/24 dev eth2
 ```
 
-### SGI_Prims:
+### PC2:
 ```
-ip add add 100.1.20.10/24 dev eth0
+ip add add 172.16.10.2/24 dev eth2
+```
+
+### PC3:
+```
+ip add add 172.16.10.3/24 dev eth2
 ```
 
 

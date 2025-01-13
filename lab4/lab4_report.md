@@ -267,7 +267,7 @@ add name=vpls_br protocol-mode=none
 /interface bridge port
 add bridge=vpls_br interface=ether4
 /interface vpls bgp-vpls
-add bridge=vpls_br export-route-targets=1:100 import-route-targets=1:100 name=vpls route-distinguisher=1:100 site-id=1
+add bridge=vpls_br export-route-targets=1:100 import-route-targets=1:100 name=vpls route-distinguisher=1:100 site-id=2
 
 /ip address
 add address=192.168.30.1/24 interface=vpls 
@@ -306,7 +306,7 @@ add name=vpls_br protocol-mode=none
 /interface bridge port
 add bridge=vpls_br interface=ether4
 /interface vpls bgp-vpls
-add bridge=vpls_br export-route-targets=1:100 import-route-targets=1:100 name=vpls route-distinguisher=1:100 site-id=4
+add bridge=vpls_br export-route-targets=1:100 import-route-targets=1:100 name=vpls route-distinguisher=1:100 site-id=3
 
 /ip address
 add address=192.168.30.4/24 interface=vpls 
@@ -336,7 +336,7 @@ add name=vpls_br protocol-mode=none
 /interface bridge port
 add bridge=vpls_br interface=ether4
 /interface vpls bgp-vpls
-add bridge=vpls_br export-route-targets=1:100 import-route-targets=1:100 name=vpls route-distinguisher=1:100 site-id=6
+add bridge=vpls_br export-route-targets=1:100 import-route-targets=1:100 name=vpls route-distinguisher=1:100 site-id=4
 
 /ip address
 add address=192.168.30.6/24 interface=vpls 

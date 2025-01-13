@@ -97,9 +97,9 @@ set 0 as=65500 router-id=192.168.10.2
 add address-families=vpnv4 name=peer_NY remote-address=192.168.10.1 \
     remote-as=65500 update-source=loopback
 add address-families=vpnv4 name=peer_LBN remote-address=192.168.10.3 \
-    remote-as=65500 update-source=loopback
+    remote-as=65500 route-reflect=yes update-source=loopback
 add address-families=vpnv4 name=peer_HKI remote-address=192.168.10.5 \
-    remote-as=65500 update-source=loopback
+    remote-as=65500 route-reflect=yes update-source=loopback
 ```
 
 ### RO1_LBN:
@@ -131,9 +131,9 @@ set 0 as=65500 router-id=192.168.10.3
 add address-families=vpnv4 name=peer_SVL remote-address=192.168.10.4 \
     remote-as=65500 update-source=loopback
 add address-families=vpnv4 name=peer_LND remote-address=192.168.10.2 \
-    remote-as=65500 update-source=loopback
+    remote-as=65500 route-reflect=yes update-source=loopback
 add address-families=vpnv4 name=peer_HKI remote-address=192.168.10.5 \
-    remote-as=65500 update-source=loopback
+    remote-as=65500 route-reflect=yes update-source=loopback
 ```
 
 ### RO1_SVL:
@@ -198,9 +198,9 @@ add interface=ether5
 set 0 as=65500 router-id=192.168.10.5
 /routing bgp peer
 add address-families=vpnv4 name=peer_LND remote-address=192.168.10.2 \
-    remote-as=65500 update-source=loopback
+    remote-as=65500 route-reflect=yes update-source=loopback
 add address-families=vpnv4 name=peer_LBN remote-address=192.168.10.3 \
-    remote-as=65500 update-source=loopback
+    remote-as=65500 route-reflect=yes update-source=loopback
 add address-families=vpnv4 name=peer_SPB remote-address=192.168.10.6 \
     remote-as=65500 update-source=loopback
 ```

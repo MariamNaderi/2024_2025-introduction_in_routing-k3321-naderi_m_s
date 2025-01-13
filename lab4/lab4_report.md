@@ -262,36 +262,37 @@ add address-families=vpnv4 name=peer_HKI remote-address=192.168.10.5 \
 remove 0
 
 /interface bridge
-add name=vpls_br
-
-/interface vpls
-add name=vpls_SVL disabled=no remote-peer=192.168.10.4 vpls-id=555:555
-add name=vpls_SPB disabled=no remote-peer=192.168.10.6 vpls-id=555:555
-
-
+aadd name=vpls_br protocol-mode=none
 
 /interface bridge port
-add bridge=bridge-vpls interface=vpls1
-add bridge=bridge-vpls interface=vpls2
-add bridge=bridge-vpls interface=ether4
+add bridge=vpls_br interface=ether4
+/interface vpls bgp-vpls
+add bridge=vpls_br export-route-targets=1:100 import-route-targets=1:100 name=vpls route-distinguisher=1:100 site-id=1
+
+/ip address
+add address=192.168.30.1/24 interface=vpls 
+
+/routing bgp peer
+set 0 address-families=l2vpn
 ```
 
+### LND
 
-/interface bridge
-add name=vpls protocol-mode=none
+```
+/routing bgp peer
+set 0 address-families=l2vpn
+set 1 address-families=l2vpn
+set 2 address-families=l2vpn
+```
 
+### LBN
 
-/interface bridge port
-add bridge=vpls interface=ether3
-
-/interface vpls bgp-vpls
-add bridge=vpls export-route-targets=1:2 import-route-targets=1:2 name=vpls \
-    route-distinguisher=1:2 site-id=6
-    
-/ip address
-add address=10.10.0.10/24 interface=vpls network=10.10.0.0
-
-
+```
+/routing bgp peer
+set 0 address-families=l2vpn
+set 1 address-families=l2vpn
+set 2 address-families=l2vpn
+```
 
 ### SVL
 
@@ -299,17 +300,28 @@ add address=10.10.0.10/24 interface=vpls network=10.10.0.0
 /ip route vrf
 remove 0
 
-/interface vpls
-add name=vpls1 disabled=no remote-peer=10.0.1.252 vpls-id=250:250
-add name=vpls2 disabled=no remote-peer=10.0.2.252 vpls-id=250:250
-
 /interface bridge
-add name=bridge-vpls
+aadd name=vpls_br protocol-mode=none
 
 /interface bridge port
-add bridge=bridge-vpls interface=vpls1
-add bridge=bridge-vpls interface=vpls2
-add bridge=bridge-vpls interface=ether4
+add bridge=vpls_br interface=ether4
+/interface vpls bgp-vpls
+add bridge=vpls_br export-route-targets=1:100 import-route-targets=1:100 name=vpls route-distinguisher=1:100 site-id=4
+
+/ip address
+add address=192.168.30.4/24 interface=vpls 
+
+/routing bgp peer
+set 0 address-families=l2vpn
+```
+
+### HKI
+
+```
+/routing bgp peer
+set 0 address-families=l2vpn
+set 1 address-families=l2vpn
+set 2 address-families=l2vpn
 ```
 
 ### SPB
@@ -318,17 +330,19 @@ add bridge=bridge-vpls interface=ether4
 /ip route vrf
 remove 0
 
-/interface vpls
-add name=vpls1 disabled=no remote-peer=10.0.2.252 vpls-id=250:250
-add name=vpls2 disabled=no remote-peer=10.0.3.252 vpls-id=250:250
-
 /interface bridge
-add name=bridge-vpls
+aadd name=vpls_br protocol-mode=none
 
 /interface bridge port
-add bridge=bridge-vpls interface=vpls1
-add bridge=bridge-vpls interface=vpls2
-add bridge=bridge-vpls interface=ether4
+add bridge=vpls_br interface=ether4
+/interface vpls bgp-vpls
+add bridge=vpls_br export-route-targets=1:100 import-route-targets=1:100 name=vpls route-distinguisher=1:100 site-id=6
+
+/ip address
+add address=192.168.30.6/24 interface=vpls 
+
+/routing bgp peer
+set 0 address-families=l2vpn
 ```
 
 

@@ -262,7 +262,7 @@ add address-families=vpnv4 name=peer_HKI remote-address=192.168.10.5 \
 remove 0
 
 /interface bridge
-aadd name=vpls_br protocol-mode=none
+add name=vpls_br protocol-mode=none
 
 /interface bridge port
 add bridge=vpls_br interface=ether4
@@ -301,7 +301,7 @@ set 2 address-families=l2vpn
 remove 0
 
 /interface bridge
-aadd name=vpls_br protocol-mode=none
+add name=vpls_br protocol-mode=none
 
 /interface bridge port
 add bridge=vpls_br interface=ether4
@@ -331,7 +331,7 @@ set 2 address-families=l2vpn
 remove 0
 
 /interface bridge
-aadd name=vpls_br protocol-mode=none
+add name=vpls_br protocol-mode=none
 
 /interface bridge port
 add bridge=vpls_br interface=ether4

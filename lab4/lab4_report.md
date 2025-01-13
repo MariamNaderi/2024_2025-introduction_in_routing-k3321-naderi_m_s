@@ -332,7 +332,6 @@ add bridge=bridge-vpls interface=ether4
 ```
 
 
-
 ### PC1:
 ```
 ip add add 172.16.10.1/24 dev eth2
@@ -351,42 +350,14 @@ ip add add 172.16.10.3/24 dev eth2
 
 ### Результаты пингов: 
 
-### PC -> SGI Prims:
+### PC1:
 
 <img src="./pic/pic7.PNG" style="width:450px;">
 
-### SGI Prims -> PC:
+### PC2:
 
 <img src="./pic/pic8.PNG" style="width:450px;">
 
+### PC3:
 
-### Проверки протоколов: 
-
-### NY:
-
-<img src="./pic/pic1.PNG" style="width:1450px;">
-
-### LND:
-
-<img src="./pic/pic2.PNG" style="width:1450px;">
-
-### LBN:
-
-<img src="./pic/pic3.PNG" style="width:1450px;">
-
-### HKI:
-
-<img src="./pic/pic4.PNG" style="width:1450px;">
-
-### MSK:
-
-<img src="./pic/pic5.PNG" style="width:1450px;">
-
-### SPB:
-
-<img src="./pic/pic6.PNG" style="width:1450px;">
-
-
-### Трассировка:
-
-<img src="./pic/trace.PNG" style="width:1450px;">
+<img src="./pic/pic8.PNG" style="width:450px;">

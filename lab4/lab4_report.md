@@ -244,13 +244,13 @@ add address-families=vpnv4 name=peer_HKI remote-address=192.168.10.5 \
 
 
 ### NY
-<img src="./pic/NY_part1.PNG" style="width:450px;">
+<img src="./pic/NY_part1.PNG" style="width:1450px;">
 
 ### SVL
-<img src="./pic/SVL_part1.PNG" style="width:450px;">
+<img src="./pic/SVL_part1.PNG" style="width:1450px;">
 
 ### SPB
-<img src="./pic/SPB_part1.PNG" style="width:450px;">
+<img src="./pic/SPB_part1.PNG" style="width:1450px;">
 
 
 ## Часть 2

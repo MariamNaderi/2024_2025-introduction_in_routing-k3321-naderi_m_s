@@ -240,7 +240,98 @@ add address-families=vpnv4 name=peer_HKI remote-address=192.168.10.5 \
     remote-as=65500 update-source=loopback
 ```
 
+### Результат
+
+
+### NY
+<img src="./pic/NY_part1.PNG" style="width:450px;">
+
+### SVL
+<img src="./pic/SVL_part1.PNG" style="width:450px;">
+
+### SPB
+<img src="./pic/SPB_part1.PNG" style="width:450px;">
+
+
 ## Часть 2
+
+### NY
+
+```
+/ip route vrf
+remove 0
+
+/interface bridge
+add name=vpls_br
+
+/interface vpls
+add name=vpls_SVL disabled=no remote-peer=192.168.10.4 vpls-id=555:555
+add name=vpls_SPB disabled=no remote-peer=192.168.10.6 vpls-id=555:555
+
+
+
+/interface bridge port
+add bridge=bridge-vpls interface=vpls1
+add bridge=bridge-vpls interface=vpls2
+add bridge=bridge-vpls interface=ether4
+```
+
+
+/interface bridge
+add name=vpls protocol-mode=none
+
+
+/interface bridge port
+add bridge=vpls interface=ether3
+
+/interface vpls bgp-vpls
+add bridge=vpls export-route-targets=1:2 import-route-targets=1:2 name=vpls \
+    route-distinguisher=1:2 site-id=6
+    
+/ip address
+add address=10.10.0.10/24 interface=vpls network=10.10.0.0
+
+
+
+### SVL
+
+```
+/ip route vrf
+remove 0
+
+/interface vpls
+add name=vpls1 disabled=no remote-peer=10.0.1.252 vpls-id=250:250
+add name=vpls2 disabled=no remote-peer=10.0.2.252 vpls-id=250:250
+
+/interface bridge
+add name=bridge-vpls
+
+/interface bridge port
+add bridge=bridge-vpls interface=vpls1
+add bridge=bridge-vpls interface=vpls2
+add bridge=bridge-vpls interface=ether4
+```
+
+### SPB
+
+```
+/ip route vrf
+remove 0
+
+/interface vpls
+add name=vpls1 disabled=no remote-peer=10.0.2.252 vpls-id=250:250
+add name=vpls2 disabled=no remote-peer=10.0.3.252 vpls-id=250:250
+
+/interface bridge
+add name=bridge-vpls
+
+/interface bridge port
+add bridge=bridge-vpls interface=vpls1
+add bridge=bridge-vpls interface=vpls2
+add bridge=bridge-vpls interface=ether4
+```
+
+
 
 ### PC1:
 ```

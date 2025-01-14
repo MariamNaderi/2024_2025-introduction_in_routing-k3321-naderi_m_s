@@ -366,9 +366,9 @@ ip add add 172.16.10.3/24 dev eth2
 
 ### PC1 --> PC2, PC3:
 
-<img src="./pic/ping1.PNG" style="width:1050px;">
+<img src="./pic/ping1.PNG" style="width:850px;">
 
 ### PC2 --> PC3:
 
-<img src="./pic/ping2.PNG" style="width:1050px;">
+<img src="./pic/ping2.PNG" style="width:850px;">
 

@@ -262,12 +262,12 @@ add address-families=vpnv4 name=peer_HKI remote-address=192.168.10.5 \
 remove 0
 
 /interface bridge
-add name=vpls_br protocol-mode=none
+add name=vpls protocol-mode=none
 
 /interface bridge port
-add bridge=vpls_br interface=ether4
+add bridge=vpls interface=ether4
 /interface vpls bgp-vpls
-add bridge=vpls_br export-route-targets=1:100 import-route-targets=1:100 name=vpls route-distinguisher=1:100 site-id=2
+add bridge=vpls export-route-targets=1:2 import-route-targets=1:2 name=vpls route-distinguisher=1:2 
 
 /ip address
 add address=192.168.30.1/24 interface=vpls 
@@ -301,12 +301,12 @@ set 2 address-families=l2vpn
 remove 0
 
 /interface bridge
-add name=vpls_br protocol-mode=none
+add name=vpls protocol-mode=none
 
 /interface bridge port
-add bridge=vpls_br interface=ether4
+add bridge=vpls interface=ether4
 /interface vpls bgp-vpls
-add bridge=vpls_br export-route-targets=1:100 import-route-targets=1:100 name=vpls route-distinguisher=1:100 site-id=3
+add bridge=vpls export-route-targets=1:2 import-route-targets=1:2 name=vpls route-distinguisher=1:2 site-id=4
 
 /ip address
 add address=192.168.30.4/24 interface=vpls 
@@ -331,12 +331,12 @@ set 2 address-families=l2vpn
 remove 0
 
 /interface bridge
-add name=vpls_br protocol-mode=none
+add name=vpls protocol-mode=none
 
 /interface bridge port
-add bridge=vpls_br interface=ether4
+add bridge=vpls interface=ether4
 /interface vpls bgp-vpls
-add bridge=vpls_br export-route-targets=1:100 import-route-targets=1:100 name=vpls route-distinguisher=1:100 site-id=4
+add bridge=vpls export-route-targets=1:2 import-route-targets=1:2 name=vpls route-distinguisher=1:2 site-id=6
 
 /ip address
 add address=192.168.30.6/24 interface=vpls 
@@ -364,14 +364,11 @@ ip add add 172.16.10.3/24 dev eth2
 
 ### Результаты пингов: 
 
-### PC1:
+### PC1 --> PC2, PC3:
 
-<img src="./pic/pic7.PNG" style="width:450px;">
+<img src="./pic/ping1.PNG" style="width:450px;">
 
-### PC2:
+### PC2 --> PC3:
 
-<img src="./pic/pic8.PNG" style="width:450px;">
+<img src="./pic/ping2.PNG" style="width:450px;">
 
-### PC3:
-
-<img src="./pic/pic8.PNG" style="width:450px;">

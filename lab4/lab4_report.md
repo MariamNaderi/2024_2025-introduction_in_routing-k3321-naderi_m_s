@@ -12,7 +12,7 @@ Author: Naderi Mariam Shakhovna
 
 Lab: Lab4
 
-Date of create: 17.12.2024
+Date of create: 29.12.2024
 
 Date of finished: 
 
@@ -366,9 +366,9 @@ ip add add 172.16.10.3/24 dev eth2
 
 ### PC1 --> PC2, PC3:
 
-<img src="./pic/ping1.PNG" style="width:1450px;">
+<img src="./pic/ping1.PNG" style="width:1050px;">
 
 ### PC2 --> PC3:
 
-<img src="./pic/ping2.PNG" style="width:1450px;">
+<img src="./pic/ping2.PNG" style="width:1050px;">
 
